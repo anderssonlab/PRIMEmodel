@@ -6,7 +6,7 @@ suppressWarnings(suppressMessages({
   library(parallel)
   library(GenomicRanges)
   library(PRIME)
-  library(PRIMEloci)
+  library(PRIMEmodel)
   library(future.apply)
   library(SummarizedExperiment)
 }))
@@ -43,7 +43,7 @@ if (!dir.exists(input_dir)) {
 
 postprocess_partial_name <- args$partial_name
 output_dir <- args$output_dir
-PRIMEloci::plc_create_output_dir(output_dir)
+PRIMEmodel::plc_create_output_dir(output_dir)
 
 score_threshold <- args$score_threshold
 score_diff <- args$score_diff
@@ -82,13 +82,13 @@ if (num_cores == 1) {
   processing_method <- "callr"
   plc_message("⚠️ num_workers was set to 1. Using callr backend: tasks will run sequentially (despite using multiple R sessions).") # nolint: line_length_linter.
 } else {
-  processing_method <- PRIMEloci::plc_detect_parallel_plan()
+  processing_method <- PRIMEmodel::plc_detect_parallel_plan()
 }
 
 
-plc_message("🚀 Running PRIMEloci -6: Postprocessing prediction BEDs")
-bed_files <- PRIMEloci::plc_find_bed_files_by_partial_name(input_dir,
-                                                           partial_name = postprocess_partial_name) # nolint: line_length_linter.
+plc_message("🚀 Running PRIMEmodel -6: Postprocessing prediction BEDs")
+bed_files <- PRIMEmodel::plc_find_bed_files_by_partial_name(input_dir,
+                                                            partial_name = postprocess_partial_name) # nolint: line_length_linter.
 if (length(bed_files) == 0) {
   plc_error(paste("❌ No BED files found for postprocessing in",
                   input_dir))
@@ -109,15 +109,15 @@ result_named_list <- lapply(seq_along(bed_files), function(i) {
   } else {
     pattern_match
   }
-  result_gr <- PRIMEloci::plc_coreovl_with_d(bed_file = bed_file,
-                                             score_threshold = score_threshold,
-                                             score_diff = score_diff,
-                                             core_width = core_width,
-                                             return_gr = TRUE,
-                                             output_dir = output_dir,
-                                             save_rds = FALSE,
-                                             num_cores = num_cores,
-                                             processing_method = processing_method)
+  result_gr <- PRIMEmodel::plc_coreovl_with_d(bed_file = bed_file,
+                                              score_threshold = score_threshold,
+                                              score_diff = score_diff,
+                                              core_width = core_width,
+                                              return_gr = TRUE,
+                                              output_dir = output_dir,
+                                              save_rds = FALSE,
+                                              num_cores = num_cores,
+                                              processing_method = processing_method)
   if (!is.null(result_gr)) {
     list(name = sample_name, gr = result_gr)
   } else {

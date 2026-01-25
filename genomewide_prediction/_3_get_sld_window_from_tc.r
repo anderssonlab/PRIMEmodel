@@ -5,7 +5,7 @@ suppressWarnings(suppressMessages({
   library(parallel)
   library(argparse)
   library(PRIME)
-  library(PRIMEloci)
+  library(PRIMEmodel)
 }))
 
 # Create argument parser
@@ -34,7 +34,7 @@ tc_grl <- readRDS(args$infile)
 
 # Output
 output_dir <- args$output_dir
-PRIMEloci::plc_create_output_dir(output_dir)
+PRIMEmodel::plc_create_output_dir(output_dir)
 outfile_sld_tc_grl <- args$outfile
 
 # parameters
@@ -72,19 +72,19 @@ if (num_cores == 1) {
   processing_method <- "callr"
   plc_message("⚠️ num_workers was set to 1. Using callr backend: tasks will run sequentially (despite using multiple R sessions).") # nolint: line_length_linter.
 } else {
-  processing_method <- PRIMEloci::plc_detect_parallel_plan()
+  processing_method <- PRIMEmodel::plc_detect_parallel_plan()
 }
 
 
-plc_message("🚀 Running PRIMEloci -3: sliding windows covering reduced TC regions") # nolint: line_length_linter.
+plc_message("🚀 Running PRIMEmodel -3: sliding windows covering reduced TC regions") # nolint: line_length_linter.
 
 if (inherits(tc_grl, "GenomicRanges::GRanges")) {
   start_time <- Sys.time()
-  tc_sliding_window_grl <- PRIMEloci::plc_tc_sliding_window(tc_grl,
-                                                            sld_by = sld_by,
-                                                            ext_dis = ext_dis,
-                                                            num_cores = num_cores,
-                                                            processing_method = processing_method) # nolint: line_length_linter.
+  tc_sliding_window_grl <- PRIMEmodel::plc_tc_sliding_window(tc_grl,
+                                                             sld_by = sld_by,
+                                                             ext_dis = ext_dis,
+                                                             num_cores = num_cores,
+                                                             processing_method = processing_method) # nolint: line_length_linter.
   plc_message(sprintf("⏱️ Time taken: %.2f minutes",
                       as.numeric(difftime(Sys.time(),
                                           start_time,

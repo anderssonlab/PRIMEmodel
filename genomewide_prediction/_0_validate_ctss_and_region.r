@@ -5,7 +5,7 @@ suppressWarnings(suppressMessages({
   library(CAGEfightR)
   library(GenomicRanges)
   library(PRIME)
-  library(PRIMEloci)
+  library(PRIMEmodel)
   library(assertthat)
 }))
 
@@ -35,7 +35,7 @@ infile_region_gr <- args$region
 region_gr <- readRDS(infile_region_gr)
 
 output_dir <- args$output_dir
-PRIMEloci::plc_create_output_dir(args$output_dir)
+PRIMEmodel::plc_create_output_dir(args$output_dir)
 
 assertthat::assert_that(
   methods::is(ctss_rse, "RangedSummarizedExperiment"),
@@ -48,11 +48,11 @@ assertthat::assert_that(
   msg = "❌ The object must be a GRanges object."
 )
 
-plc_message("🚀 Running PRIMEloci -0: validating the ctss and region object provided") # nolint: line_length_linter.
+plc_message("🚀 Running PRIMEmodel -0: validating the ctss and region object provided") # nolint: line_length_linter.
 
-validate_tc <- PRIMEloci::plc_validate_tc_object(region_gr,
-                                                 ctss_rse,
-                                                 ext_dis = as.integer(args$ext_dis))
+validate_tc <- PRIMEmodel::plc_validate_tc_object(region_gr,
+                                                  ctss_rse,
+                                                  ext_dis = as.integer(args$ext_dis))
 if (!validate_tc) {
   plc_error("TC object validation failed. Ensure the TC object is valid.")
 }

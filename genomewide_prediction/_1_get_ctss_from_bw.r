@@ -5,7 +5,7 @@ suppressWarnings(suppressMessages({
   library(CAGEfightR)
   library(GenomicRanges)
   library(PRIME)
-  library(PRIMEloci)
+  library(PRIMEmodel)
   library(assertthat)
 }))
 
@@ -37,11 +37,11 @@ input_dir <- args$input_dir
 design_matrix_file <- args$design_matrix
 
 output_dir <- args$output_dir
-PRIMEloci::plc_create_output_dir(args$output_dir)
+PRIMEmodel::plc_create_output_dir(args$output_dir)
 outfile_ctss_rse <- args$outfile
 
 
-plc_message("🚀 Running PRIMEloci -1: Getting CTSS from bw files")
+plc_message("🚀 Running PRIMEmodel -1: Getting CTSS from bw files")
 # Read in CAGE BigWig, based on design matrix provided,
 # no filtering/subsetBySupport steps are performed
 plc_message("Reading design matrix and importing BigWig files...")
@@ -50,8 +50,7 @@ design_matrix <- read.table(design_matrix_file,
                             sep = "\t",
                             row.names = "Name")
 plc_message("Getting CTSS from BigWig ...")
-ctss_rse <- PRIMEloci::plc_get_ctss_from_bw(input_dir, design_matrix)
-
+ctss_rse <- PRIMEmodel::plc_get_ctss_from_bw(input_dir, design_matrix)
 # Keep only standard chromosomes if specified
 if (args$keep_standard_chr) {
   plc_message("Keeping only standard chromosomes..")

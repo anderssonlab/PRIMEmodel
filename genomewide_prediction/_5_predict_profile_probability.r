@@ -6,7 +6,7 @@ suppressWarnings(suppressMessages({
   library(parallel)
   library(GenomicRanges)
   library(PRIME)
-  library(PRIMEloci)
+  library(PRIMEmodel)
   library(future.apply)
   library(SummarizedExperiment)
 }))
@@ -15,21 +15,21 @@ suppressWarnings(suppressMessages({
 parser <- ArgumentParser()
 
 parser$add_argument("-i", "--input_dir",
-                    default = "./PRIMEloci_profiles",
-                    help = "Path to the input directory containing the main PRIMEloci profiles (default: ./PRIMEloci_profiles)") # nolint: line_length_linter.
+                    default = "./PRIMEmodel_profiles",
+                    help = "Path to the input directory containing the main PRIMEmodel profiles (default: ./PRIMEmodel_profiles)") # nolint: line_length_linter.
 #parser$add_argument("-o", "--output_dir", default = "./",
 #                    help = "Path to the output directory")
-parser$add_argument("--profile_dir_name", default = "PRIMEloci_profiles",
-                    help = "Name of the profile main directory (default: PRIMEloci_profiles)") # nolint: line_length_linter.
+parser$add_argument("--profile_dir_name", default = "PRIMEmodel_profiles",
+                    help = "Name of the profile main directory (default: PRIMEmodel_profiles)") # nolint: line_length_linter.
 
 parser$add_argument("--python_path", default = "~/.virtualenvs/prime-env",
                     help = "Path to Python executable. If not provided, the system's default Python will be used.") # nolint: line_length_linter.
 
 parser$add_argument("-m", "--model_path",
                     default = file.path(system.file("model", package = "PRIME"),
-                                        "PRIMEloci_GM12878_model_1.0.sav"),
+                                        "PRIME_GM12878_model_1.0.sav"),
                     help = "Model full path")
-parser$add_argument("--name_prefix", default = "PRIMEloci",
+parser$add_argument("--name_prefix", default = "PRIMEmodel",
                     help = "Prefix for prediction output")
 
 parser$add_argument("-p", "--num_cores", type = "integer", default = NULL,
@@ -53,7 +53,7 @@ assertthat::assert_that(length(profile_files) > 0,
                                     profiles_subtnorm_dir))
 
 model_path <- args$model_path
-predict_script_path <- file.path(system.file("python", package = "PRIMEloci"),
+predict_script_path <- file.path(system.file("python", package = "PRIMEmodel"),
                                  "main.py")
 
 assertthat::assert_that(file.exists(predict_script_path),
@@ -84,7 +84,7 @@ if (num_cores == 1) {
   processing_method <- "callr"
   plc_message("⚠️ num_workers was set to 1. Using callr backend: tasks will run sequentially (despite using multiple R sessions).") # nolint: line_length_linter.
 } else {
-  processing_method <- PRIMEloci:::plc_detect_parallel_plan()
+  processing_method <- PRIMEmodel:::plc_detect_parallel_plan()
 }
 
 # Python config
@@ -96,10 +96,10 @@ if (is.null(args$python_path)) {
 } else {
   python_path <- args$python_path
 }
-py_conf <- PRIMEloci:::plc_configure_python(python_path = python_path)
+py_conf <- PRIMEmodel:::plc_configure_python(python_path = python_path)
 
 
-plc_message("🚀 Running PRIMEloci -5: Prediction using PRIMEloci model")
+plc_message("🚀 Running PRIMEmodel -5: Prediction using PRIMEmodel model")
 
 prediction_cmd <- c(
   python_path, predict_script_path,
@@ -107,7 +107,7 @@ prediction_cmd <- c(
   "--profile_main_dir", profile_main_dir,
   "--combined_outdir", dirname(profile_main_dir),
   "--model_path", model_path,
-  "--log_file", file.path(profile_main_dir, "PRIMEloci_prediction.log"),
+  "--log_file", file.path(profile_main_dir, "PRIMEmodel_prediction.log"),
   "--name_prefix", name_prefix
 )
 
@@ -138,7 +138,7 @@ result <- tryCatch(
 )
 
 if (!is.null(attr(result, "status")) && attr(result, "status") != 0) {
-  plc_error("❌ Prediction script failed. Check PRIMEloci.log for details.")
+  plc_error("❌ Prediction script failed. Check PRIMEmodel.log for details.")
 } else {
   plc_message("✅ DONE :: Prediction script executed successfully.")
 }

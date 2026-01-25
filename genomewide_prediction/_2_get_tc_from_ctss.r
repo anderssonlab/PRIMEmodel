@@ -5,7 +5,7 @@ suppressWarnings(suppressMessages({
   library(CAGEfightR)
   library(GenomicRanges)
   library(PRIME)
-  library(PRIMEloci)
+  library(PRIMEmodel)
   library(assertthat)
 }))
 
@@ -35,7 +35,7 @@ infile_ctss_rse <- args$ctss_rse
 ctss_rse <- readRDS(infile_ctss_rse)
 
 output_dir <- args$output_dir
-PRIMEloci::plc_create_output_dir(output_dir)
+PRIMEmodel::plc_create_output_dir(output_dir)
 outfile_tc_grl <- args$outfile
 
 
@@ -44,19 +44,19 @@ assertthat::assert_that(
   msg = "`❌ ctss_rse` must be a RangedSummarizedExperiment object."
 )
 
-plc_message("🚀 Running PRIMEloci -2: get extended the tc object provided and validated") # nolint: line_length_linter.
+plc_message("🚀 Running PRIMEmodel -2: get extended the tc object provided and validated") # nolint: line_length_linter.
 plc_message(sprintf("🕒 Pipeline started at: %s", Sys.time()))
 
 plc_message("Creating tc object ...")
-tc_grl <- PRIMEloci::plc_get_tcs_and_extend_fromthick(ctss_rse,
-                                                      ext_dis = ext_dis)
+tc_grl <- PRIMEmodel::plc_get_tcs_and_extend_fromthick(ctss_rse,
+                                                       ext_dis = ext_dis)
 plc_message("Saving tc object ...")
 saveRDS(tc_grl, file = file.path(output_dir, outfile_tc_grl))
 
 plc_message("Validating tc object ...")
-validate_tc <- PRIMEloci::plc_validate_tc_object(tc_grl,
-                                                 ctss_rse,
-                                                 ext_dis = ext_dis)
+validate_tc <- PRIMEmodel::plc_validate_tc_object(tc_grl,
+                                                  ctss_rse,
+                                                  ext_dis = ext_dis)
 if (!validate_tc) {
   plc_error("TC object validation failed. Ensure the TC object is valid.")
 }

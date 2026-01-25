@@ -19,13 +19,13 @@ from utility import (
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Run PRIMEloci prediction.")
+    parser = argparse.ArgumentParser(description="Run PRIMEmodel prediction.")
     parser.add_argument("--script_dir", required=True)
     parser.add_argument("--profile_main_dir", required=True)
     parser.add_argument("--combined_outdir", required=True)
     parser.add_argument("--model_path", required=True)
     parser.add_argument("--log_file", required=True)
-    parser.add_argument("--name_prefix", default="PRIMEloci")
+    parser.add_argument("--name_prefix", default="PRIMEmodel")
     parser.add_argument("--num_core", type=int, default=None,
                         help="Number of cores to use. Defaults to "
                         "min(25, half of available CPU cores).")
