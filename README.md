@@ -3,8 +3,8 @@
 
 The PRIMEmodel repository provides machine learning-based tools for the genome-wide prediction of regulatory elements using CAGE and other 5'-end sequencing data. The core model, based on LightGBM, was trained on GM12878 whole-cell CAGE and nucCAGE data from the Andersson lab. Available as an R package, PRIMEmodel automates the entire analytical workflow, from processing input bigWig files to the accurate identification of enhancers and promoters. To maximize user flexibility, the tool offers two primary modes of operation:
 
-- R package: Features two main functions that encapsulate the complete pipeline for streamlined, user-friendly execution.
-- Bash scripts: Provides pre-configured scripts to execute the pipeline in its entirety or in modular parts. This option is ideal for users who prefer a command-line interface or require automation for large-scale data processing tasks.
+- **R package:** Features two main functions that encapsulate the complete pipeline for streamlined, user-friendly execution.
+- **Bash scripts:** Provides pre-configured scripts to execute the pipeline in its entirety or in modular parts. This option is ideal for users who prefer a command-line interface or require automation for large-scale data processing tasks.
 
 Additionally, individual steps can be run independently or seamlessly integrated via a master bash script for selective execution. 
 Although the project was initially developed and optimized for the human reference genome (hg38), the pipeline can be readily adapted for use with other species.
