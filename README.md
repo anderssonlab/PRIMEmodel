@@ -1,9 +1,13 @@
 
 # PRIMEmodel
 
-The PRIMEmodel repository offers tools for genome-wide prediction of regulatory elements from CAGE data using machine learning models. The core model, based on LightGBM, was trained on GM12878 whole-cell CAGE and nucCAGE data from the Andersson lab. PRIMEmodel automates the workflow from bigWig files to accurately identified enhancers and promoters, providing flexibility for users to either use bash scripts for a full pipeline execution or directly interact with R functions with the PRIMEmodel package. While the project was initially developed based on the human genome hg38, it can be adapted for use with other species.
+The PRIMEmodel repository provides machine learning-based tools for the genome-wide prediction of regulatory elements using CAGE and other 5'-end sequencing data. The core model, based on LightGBM, was trained on GM12878 whole-cell CAGE and nucCAGE data from the Andersson lab. Available as an R package, PRIMEmodel automates the entire analytical workflow, from processing input bigWig files to the accurate identification of enhancers and promoters. To maximize user flexibility, the tool offers two primary modes of operation:
 
-Execute a full pipeline or some parts of the pipeline using pre-configured bash scripts, ideal for users who prefer a command-line interface or need to automate large-scale data processing tasks. Each step can be run individually or as part of a pipeline with a main bash script for selective execution.
+- R package: Features two main functions that encapsulate the complete pipeline for streamlined, user-friendly execution.
+- Bash scripts: Provides pre-configured scripts to execute the pipeline in its entirety or in modular parts. This option is ideal for users who prefer a command-line interface or require automation for large-scale data processing tasks.
+
+Additionally, individual steps can be run independently or seamlessly integrated via a master bash script for selective execution. 
+Although the project was initially developed and optimized for the human reference genome (hg38), the pipeline can be readily adapted for use with other species.
 
 
 
