@@ -164,7 +164,7 @@ virtualenv_create(envname = env_name)
 use_virtualenv(env_name, required = TRUE)
 
 # Install Python packages
-required_pkgs <- readLines(system.file("envfile", "environment.txt", package = "PRIMEmodel"))
+required_pkgs <- readLines(file.path(find.package("PRIMEmodel"), "envfile", "environment.txt"))
 reticulate::py_install(packages = required_pkgs, envname = env_name, method = "virtualenv")
 
 # Confirm active Python path
