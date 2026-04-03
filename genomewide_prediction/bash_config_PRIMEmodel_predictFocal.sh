@@ -6,7 +6,7 @@ REGION_RDS="PRIMEmodel_results/K562-10pct_on_PRIMEmodel_pred_all_K562_C1_combine
 OUTPUT_DIR="PRIMEmodel_results"
 
 ### 4 ### _4_get_profile.r
-# CTSS_RSE_NAME, TC_GRL_NAME, OUTPUT_DIR from above
+# CTSS_RSE_RDS, REGION_RDS, OUTPUT_DIR from above
 PROFILE_MAIN_DIR="PRIMEmodel_focal_profiles"
 PROFILE_FORMAT="npz"
 # add --save_count_profiles if you want to save count profiles
