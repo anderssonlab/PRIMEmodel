@@ -12,7 +12,7 @@ PROFILE_FORMAT="npz"
 # add --save_count_profiles if you want to save count profiles
 
 ### 5 ### _5_predict_profile_probability.py
-# OUTPUT_DIR, PROFILE_MAIN_DIR, PROFILE_SUB_DIR, and PROFILE_FILE_TYPE from above
+# OUTPUT_DIR, PROFILE_MAIN_DIR, and PROFILE_FORMAT from above
 PYTHON_PATH="/usr/bin/python3"
 MODEL_PATH=$(Rscript -e 'cat(system.file("model", "PRIME_GM12878_model_1.0.sav", package = "PRIMEmodel"))')
 PREFIX_OUT_NAME="focal"
