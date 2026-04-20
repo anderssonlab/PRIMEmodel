@@ -1,0 +1,16 @@
+---
+title: "Installation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Installation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+```{r, echo=FALSE, results='asis', eval=TRUE}
+cat(readLines("../install_PRIMEmodel.md"), sep = "\n")
+```
