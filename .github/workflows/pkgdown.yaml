@@ -32,22 +32,28 @@ jobs:
           r-version: "4.4"
           use-public-rspm: true
 
-      - name: Configure Bioconductor repositories
+      - name: Install system libraries (common Bioconductor / rtracklayer deps)
         run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libcurl4-openssl-dev \
+            libssl-dev \
+            libxml2-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libfreetype6-dev \
+            libpng-dev \
+            libtiff5-dev \
+            libjpeg-dev
+        shell: bash
+
+      - name: Install R tooling
+        run: |
+          install.packages(c("remotes", "pkgdown"))
           install.packages("BiocManager")
-          repos <- BiocManager::repositories()
-          cat(
-            "options(repos = ", deparse(repos), ")\n",
-            file = path.expand("~/.Rprofile"),
-            append = TRUE
-          )
         shell: Rscript {0}
 
-      - name: Install remotes
-        run: install.packages("remotes")
-        shell: Rscript {0}
-
-      - name: Install pryr from CRAN archive (removed from CRAN)
+      - name: Install pryr from CRAN archive (required by CAGEfightR)
         run: |
           remotes::install_url(
             "https://cran.r-project.org/src/contrib/Archive/pryr/pryr_0.1.6.tar.gz",
@@ -55,15 +61,23 @@ jobs:
           )
         shell: Rscript {0}
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: |
-            any::pkgdown
-            github::anderssonlab/PRIME
-          needs: website
+      - name: Install Bioconductor dependencies (incl. CAGEfightR)
+        run: |
+          BiocManager::install(c("CAGEfightR"), update = FALSE, ask = FALSE)
+        shell: Rscript {0}
+
+      - name: Install PRIME from GitHub
+        run: |
+          remotes::install_github("anderssonlab/PRIME", upgrade = "never")
+        shell: Rscript {0}
+
+      - name: Install PRIMEmodel
+        run: |
+          remotes::install_local(".", upgrade = "never")
+        shell: Rscript {0}
 
       - name: Build site
-        run: pkgdown::build_site_github_pages(new_process = FALSE, install = TRUE)
+        run: pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)
         shell: Rscript {0}
 
       - uses: actions/upload-pages-artifact@v4
