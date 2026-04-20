@@ -36,8 +36,11 @@ jobs:
         run: |
           install.packages("BiocManager")
           repos <- BiocManager::repositories()
-          cat("options(repos = ", deparse(repos), ")\n",
-              file = path.expand("~/.Rprofile"), append = TRUE)
+          cat(
+            "options(repos = ", deparse(repos), ")\n",
+            file = path.expand("~/.Rprofile"),
+            append = TRUE
+          )
         shell: Rscript {0}
 
       - name: Install remotes
@@ -52,14 +55,11 @@ jobs:
           )
         shell: Rscript {0}
 
-      - name: Install PRIME from GitHub (PRIMEmodel dependency)
-        run: |
-          remotes::install_github("anderssonlab/PRIME", upgrade = "never")
-        shell: Rscript {0}
-
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::pkgdown
+          extra-packages: |
+            any::pkgdown
+            github::anderssonlab/PRIME
           needs: website
 
       - name: Build site
@@ -73,4 +73,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        
