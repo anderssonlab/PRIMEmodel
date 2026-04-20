@@ -32,10 +32,12 @@ jobs:
           r-version: "4.4"
           use-public-rspm: true
 
-      - name: Install system libraries (common Bioconductor / rtracklayer deps)
+      - name: Install system libraries (Bioconductor + igraph/GLPK)
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
+            libglpk-dev \
+            libgmp3-dev \
             libcurl4-openssl-dev \
             libssl-dev \
             libxml2-dev \
@@ -53,7 +55,7 @@ jobs:
           install.packages("BiocManager")
         shell: Rscript {0}
 
-      - name: Install pryr from CRAN archive (required by CAGEfightR)
+      - name: Install pryr from CRAN archive (required by CAGEfightR dependency chain)
         run: |
           remotes::install_url(
             "https://cran.r-project.org/src/contrib/Archive/pryr/pryr_0.1.6.tar.gz",
@@ -63,7 +65,7 @@ jobs:
 
       - name: Install Bioconductor dependencies (incl. CAGEfightR)
         run: |
-          BiocManager::install(c("CAGEfightR"), update = FALSE, ask = FALSE)
+          BiocManager::install("CAGEfightR", update = FALSE, ask = FALSE)
         shell: Rscript {0}
 
       - name: Install PRIME from GitHub
