@@ -3,6 +3,9 @@ url: https://anderssonlab.github.io/PRIMEmodel
 template:
   bootstrap: 5
   bootswatch: flatly
+  bslib:
+    base_font:
+      scale: 0.8
 
 navbar:
   left:
@@ -12,11 +15,11 @@ navbar:
       href: reference/index.html
     - text: Articles
       href: articles/index.html
-    - text: Toolkit
+    - text: PRIME toolkit
       menu:
-        - text: PRIME
-          href: https://anderssonlab.github.io/PRIME
-        - text: PRIMEmodel
-          href: https://anderssonlab.github.io/PRIMEmodel
         - text: PRIMEprep
           href: https://github.com/anderssonlab/PRIMEprep
+        - text: PRIME
+          href: https://anderssonlab.github.io/PRIME/
+        - text: PRIMEmodel
+          href: https://anderssonlab.github.io/PRIMEmodel/
