@@ -23,7 +23,7 @@ Although the project was initially developed and optimized for the human referen
 
 1. The main **PRIMEmodel workflow** [running with **./PRIMEmodel.sh --predict**]
 
-​	The workflow focuses on the prediction of regulatory elements using machine learning, encompassing six key steps:	![PRIMEmodel workflow](inst/img/PRIMEmodel_31Jan2025-02.png)
+​	The workflow focuses on the prediction of regulatory elements using machine learning, encompassing six key steps: ![PRIMEmodel workflow](https://raw.githubusercontent.com/anderssonlab/PRIMEmodel/main/inst/img/PRIMEmodel_31Jan2025-02.png)
 
 ​	1) **Extracting CTSS Data** : Extract CAGE transcriptional start site (CTSS) objects from bigWig files using the CAGEfightR package.
 
@@ -49,10 +49,9 @@ Although the project was initially developed and optimized for the human referen
 
      These CTSS signals are mapped to the specified regions, and normalized profiles (step -4) is generated. Predictions (step -5) are then made for each region across all libraries.
 
-   ​	This workflow was developed as part of the **PRIMEmodel × FANTOM5** project and is applicable to a variety of use cases. Briefly, the project began by calling CTSS using CAGEfightR and pooling all libraries from the FANTOM5 database. After applying light filtering, the data were saved as an `.rds` file. PRIMEmodel steps 2–6 were then executed on the pooled data to generate prediction outputs. Subsequently, step -7 was used to convert the pooled predictions into a `GRanges` `.rds`file representing the predicted genomic regions. These pooled predicted regions were then used as input for the focal PRIMEmodel analysis. In this step, CTSS data from each individual FANTOM5 library (not the pooled one) and the pooled predicted regions were used to run focal PRIMEmodel, producing cell-facet-level data for further analysis.
+   ​	This workflow was developed as part of running **PRIMEmodel** across **FANTOM5** project CAGE data and is applicable to a variety of use cases. Briefly, the project began by calling CTSS using CAGEfightR and pooling all libraries from the FANTOM5 database. After applying light filtering, the data were saved as an `.rds` file. PRIMEmodel steps 2–6 were then executed on the pooled data to generate prediction outputs. Subsequently, step -7 was used to convert the pooled predictions into a `GRanges` `.rds`file representing the predicted genomic regions. These pooled predicted regions were then used as input for the focal PRIMEmodel analysis. In this step, CTSS data from each individual FANTOM5 library (not the pooled one) and the pooled predicted regions were used to run focal PRIMEmodel, producing cell-facet-level data for further analysis.
 
-   ​	Downstream analyses based on this pipeline can be found here:
-   ​	*[Add reference + figure for PRIMEmodel × FANTOM5 here]*
+The resulting FANTOM5 PRIME atlas predictions are available on [Zenodo](https://doi.org/10.5281/zenodo.19331479).
 
 
 ## Installation
