@@ -3,6 +3,8 @@ url: https://anderssonlab.github.io/PRIMEmodel
 template:
   bootstrap: 5
   bootswatch: flatly
+  includes:
+    in_header: pkgdown/header.html
 
 navbar:
   left:
