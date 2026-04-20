@@ -1,0 +1,22 @@
+url: https://anderssonlab.github.io/PRIMEmodel
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+
+navbar:
+  left:
+    - text: Introduction
+      href: articles/installation.html
+    - text: Reference
+      href: reference/index.html
+    - text: Articles
+      href: articles/index.html
+    - text: Toolkit
+      menu:
+        - text: PRIME
+          href: https://anderssonlab.github.io/PRIME
+        - text: PRIMEmodel
+          href: https://anderssonlab.github.io/PRIMEmodel
+        - text: PRIMEprep
+          href: https://github.com/anderssonlab/PRIMEprep
