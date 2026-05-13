@@ -23,7 +23,7 @@ Although the project was initially developed and optimized for the human referen
 
 1. The main **PRIMEmodel workflow** [running with **./PRIMEmodel.sh --predict**]
 
-​	The workflow focuses on the prediction of regulatory elements using machine learning, encompassing six key steps: ![PRIMEmodel workflow](https://raw.githubusercontent.com/anderssonlab/PRIMEmodel/main/inst/img/PRIMEmodel_31Jan2025-02.png)
+​	The workflow focuses on the prediction of regulatory elements using machine learning, encompassing six key steps: ![PRIMEmodel workflow](https://github.com/anderssonlab/PRIMEmodel/blob/main/inst/img/PRIMEmodel_genomewide_prediction.png)
 
 ​	1) **Extracting CTSS Data** : Extract CAGE transcriptional start site (CTSS) objects from bigWig files using the CAGEfightR package.
 
