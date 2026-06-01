@@ -30,7 +30,7 @@ On macOS, R (via homebrew libomp) and Python environments (via conda or virtuale
 
 The R package `PRIMEmodel` depends on a mix of CRAN and Bioconductor packages, and a custom GitHub version of `PRIME`.
 
-Note that we recommend using R 4.4 or higher. While R versions >4.2 can also be used, they may require additional setup steps. For example, on macOS, you may need to run:
+Note that we recommend using R 4.4 or higher. While R versions >=4.2 can also be used, they may require additional setup steps. For example, on macOS, you may need to run:
 ```bash
 # core build tools for R packages
 brew install gcc pkg-config
@@ -88,7 +88,7 @@ if (!requireNamespace("devtools", quietly = TRUE))
 ```
 
 4. Install CAGEfightR and PRIME
-If errors occur from prerequisite packages, the full installation protocol for PRIME can be found at: https://github.com/anderssonlab/PRIME/blob/main/PRIME_installation.md
+If errors occur from prerequisite packages, the full installation protocol for PRIME can be found at: https://github.com/anderssonlab/PRIME/blob/main/vignettes/installation.Rmd
 ```r
 BiocManager::install("CAGEfightR")
 devtools::install_github("anderssonlab/PRIME")
