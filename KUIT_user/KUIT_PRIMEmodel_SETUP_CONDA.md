@@ -126,7 +126,7 @@ PY
 ## 7. Install prebuilt CRAN R packages
 
 ```bash
-conda install -y -c conda-forge r-r.utils r-future r-future.apply r-future.callr r-foreach r-argparse r-doparallel r-reticulate r-arrow r-igraph r-catools r-zoo r-biocmanager r-remotes r-devtools r-sparsematrixstats r-matrix
+conda install -y -c conda-forge r-r.utils r-future r-future.apply r-future.callr r-foreach r-argparse r-doparallel r-reticulate r-arrow r-igraph r-catools r-zoo r-biocmanager r-remotes r-devtools r-sparsematrixstats
 ```
 
 **Expect:** R packages installed without compilation.
